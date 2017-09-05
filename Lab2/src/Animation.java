@@ -24,6 +24,12 @@ public class Animation extends JPanel {
     final static int imgWidth = 165;
     final static int imgHeight = 165;
     int test;
+    
+    public enum orcAction {
+    	FORWARD_NORTHEAST, FORWARD_NORTHWEST, FORWARD_SOUTHEAST, FORWARD_SOUTHWEST
+    }
+    
+    
 
     //Override this JPanel's paint method to cycle through picture array and draw images
     public void paint(Graphics g) {
@@ -59,7 +65,7 @@ public class Animation extends JPanel {
 
     //Constructor: get image, segment and store in array
     public Animation(){
-    	BufferedImage img = createImage();
+    	BufferedImage img = createImage(orcAction.FORWARD_NORTHEAST);
     	pics = new BufferedImage[10];
     	for(int i = 0; i < frameCount; i++)
     		pics[i] = img.getSubimage(imgWidth*i, 0, imgWidth, imgHeight);
@@ -68,8 +74,14 @@ public class Animation extends JPanel {
     }  
     
     //Read image from file and return
-    private BufferedImage createImage(){
+    private BufferedImage createImage(orcAction specifiedAction){ //orcAction is an enum
     	BufferedImage bufferedImage;
+    	
+    	switch(specifiedAction){
+    		case FORWARD_NORTHEAST:
+    			break;
+    			
+    	}
     	try {
     		bufferedImage = ImageIO.read(new File("images/orc/orc_forward_southeast.png"));
     		return bufferedImage;
