@@ -35,7 +35,7 @@ public class Animation extends JPanel {
     	
     	g.drawImage(pics[picNum], xloc+=xIncr, yloc+=yIncr, Color.gray, this);
     	}
-    	// TODO: Keep the orc from walking off-screen, turn around when bouncing off walls.
+    	// TODO: Keep the orc from walking off-screen, turn around when bouncing off walls. Test
 	//Be sure that animation picture direction matches what is happening on screen.
     }
 
