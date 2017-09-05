@@ -23,34 +23,110 @@ public class Animation extends JPanel {
     final static int frameHeight = 300;
     final static int imgWidth = 165;
     final static int imgHeight = 165;
-    public enum orcAction {
+    public enum OrcAction {
     	NORTH,SOUTH,EAST,WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST
     	}
+    OrcAction currentDirection = OrcAction.SOUTHEAST; //Initialized direction
    
-
 
     //Override this JPanel's paint method to cycle through picture array and draw images
     public void paint(Graphics g) {
-    	if(xloc >= 335) {
+    	/*CARDINAL DIRECTION TO FRAME ORIENTATION
+    	 * North = Top of the frame
+    	 * South = Bottom of the frame
+    	 * East = Right of the frame
+    	 * West = Left of the frame
+    	 */
+   
+    	if(xloc >= (frameWidth - imgWidth)){// East boundary switching direction
     		g.drawImage(pics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		switch(currentDirection){// Redirection
+	    		case EAST:
+	    			currentDirection = OrcAction.WEST;
+	    			break;
+	    		case NORTHEAST:
+	    			currentDirection = OrcAction.NORTHWEST;
+	    			break;
+	    		case SOUTHEAST:
+	    			currentDirection = OrcAction.SOUTHWEST;
+	    			break;
+    		}
     	}
-    	else if (xloc < 0){
+    	else if (xloc < 0){//West boundary switching direction
     		g.drawImage(pics[picNum], xloc, yloc, Color.gray, this);
+    		switch(currentDirection){
+	    		case WEST:
+	    			currentDirection = OrcAction.EAST;
+	    			break;
+	    		case NORTHWEST:
+	    			currentDirection = OrcAction.NORTHEAST;
+	    			break;
+	    		case SOUTHWEST:
+	    			currentDirection = OrcAction.SOUTHEAST;
+	    			break;
+	    	}
     	}
-    	else if (yloc >= 135){
+    	else if (yloc >= (frameHeight - imgHeight)){// South boundary switching direction
     		g.drawImage(pics[picNum], xloc, yloc, Color.gray, this);
+    		switch(currentDirection){
+	    		case SOUTH:
+	    			currentDirection = OrcAction.NORTH;
+	    			break;
+	    		case SOUTHEAST:
+	    			currentDirection = OrcAction.NORTHEAST;
+	    			break;
+	    		case SOUTHWEST:
+	    			currentDirection = OrcAction.NORTHWEST;
+	    			break;
+	    	}
     	}
-    	else if (yloc < 0){
+    	else if (yloc < 0){// North boundary switching direction
     		g.drawImage(pics[picNum], xloc, yloc, Color.gray, this);
+    		switch(currentDirection){
+	    		case NORTH:
+	    			currentDirection = OrcAction.SOUTH;
+	    			break;
+	    		case NORTHEAST:
+	    			currentDirection = OrcAction.SOUTHEAST;
+	    			break;
+	    		case NORTHWEST:
+	    			currentDirection = OrcAction.SOUTHWEST;
+	    			break;
+	    	}
     	}
-    	else{
     	picNum = (picNum + 1) % frameCount;
     	
-    	g.drawImage(pics[picNum], xloc+=xIncr, yloc+=yIncr, Color.gray, this);
-    	}
+    	 switch(currentDirection){// Increments coordinates by direction
+	 		case NORTH:
+	 			g.drawImage(pics[picNum], xloc, yloc-=yIncr, Color.gray, this);
+	 			break;
+	 		case SOUTH:
+	 			g.drawImage(pics[picNum], xloc, yloc+=yIncr, Color.gray, this);
+	 			break;
+	 		case EAST:
+	 			g.drawImage(pics[picNum], xloc+=xIncr, yloc, Color.gray, this);
+	 			break;
+	 		case WEST:
+	 			g.drawImage(pics[picNum], xloc-=xIncr, yloc, Color.gray, this);
+	 			break;
+	 		case NORTHEAST:
+	 			g.drawImage(pics[picNum], xloc+=xIncr, yloc-=yIncr, Color.gray, this);
+	 			break;
+	 		case NORTHWEST:
+	 			g.drawImage(pics[picNum], xloc-=xIncr, yloc-=yIncr, Color.gray, this);
+	 			break;
+	 		case SOUTHEAST:
+	 			g.drawImage(pics[picNum], xloc+=xIncr, yloc+=yIncr, Color.gray, this);
+	 			break;
+	 		case SOUTHWEST:
+	 			g.drawImage(pics[picNum], xloc-=xIncr, yloc+=yIncr, Color.gray, this);
+	 			break;
+	 	}
+    }
     	// TODO: Keep the orc from walking off-screen, turn around when bouncing off walls.
 	//Be sure that animation picture direction matches what is happening on screen.
-    }
+    
     
 
 
