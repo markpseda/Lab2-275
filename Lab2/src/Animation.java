@@ -23,11 +23,24 @@ public class Animation extends JPanel {
     final static int frameHeight = 300;
     final static int imgWidth = 165;
     final static int imgHeight = 165;
-    int test;
+    public enum orcAction {
+    	NORTH,SOUTH,EAST,WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST
+    	}
+   
+
 
     //Override this JPanel's paint method to cycle through picture array and draw images
     public void paint(Graphics g) {
-    	if((xloc >= 335) || (test == 1)) {
+    	if(xloc >= 335) {
+    		g.drawImage(pics[picNum], xloc, yloc, Color.gray, this);
+    	}
+    	else if (xloc < 0){
+    		g.drawImage(pics[picNum], xloc, yloc, Color.gray, this);
+    	}
+    	else if (yloc >= 135){
+    		g.drawImage(pics[picNum], xloc, yloc, Color.gray, this);
+    	}
+    	else if (yloc < 0){
     		g.drawImage(pics[picNum], xloc, yloc, Color.gray, this);
     	}
     	else{
@@ -38,6 +51,8 @@ public class Animation extends JPanel {
     	// TODO: Keep the orc from walking off-screen, turn around when bouncing off walls.
 	//Be sure that animation picture direction matches what is happening on screen.
     }
+    
+
 
     //Make frame, loop on repaint and wait
     public static void main(String[] args) {
