@@ -24,25 +24,29 @@ public class Animation extends JPanel {
 	final static int imgWidth = 165;
 	final static int imgHeight = 165;
 	int test;
+    
+    public enum orcAction {
+    	FORWARD_NORTHEAST, FORWARD_NORTHWEST, FORWARD_SOUTHEAST, FORWARD_SOUTHWEST
+    }
 
-	//Override this JPanel's paint method to cycle through picture array and draw images
-	public void paint(Graphics g) {
-		if((xloc >= 335) || (test == 1)) {
-			g.drawImage(pics[picNum], xloc, yloc, Color.gray, this);
-		}
-		else{
-			picNum = (picNum + 1) % frameCount;
-
-			g.drawImage(pics[picNum], xloc+=xIncr, yloc+=yIncr, Color.gray, this);
-		}
-		// TODO: Keep the orc from walking off-screen, turn around when bouncing off walls.
-		//Be sure that animation picture direction matches what is happening on screen.
-	}
+    //Override this JPanel's paint method to cycle through picture array and draw images
+    public void paint(Graphics g) {
+    	if((xloc >= 335) || (test == 1)) {
+    		g.drawImage(pics[picNum], xloc, yloc, Color.gray, this);
+    	}
+    	else{
+    	picNum = (picNum + 1) % frameCount;
+    	
+    	g.drawImage(pics[picNum], xloc+=xIncr, yloc+=yIncr, Color.gray, this);
+    	}
+    	// TODO: Keep the orc from walking off-screen, turn around when bouncing off walls. Test
+	//Be sure that animation picture direction matches what is happening on screen.
+    }
 
 	//Make frame, loop on repaint and wait
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-		frame.getContentPane().add(new Animation());
+		frame.getContentPane().add(new Animation(orcAction.FORWARD_SOUTHEAST));
 		frame.setBackground(Color.gray);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(frameWidth, frameHeight);
@@ -58,26 +62,32 @@ public class Animation extends JPanel {
 	}
 
 	//Constructor: get image, segment and store in array
-	public Animation(){
-		BufferedImage img = createImage();
+	public Animation(orcAction specifiedAction){
+		BufferedImage img = createImage(specifiedAction);
 		pics = new BufferedImage[frameCount];
 		for(int i = 0; i < frameCount; i++)
 			pics[i] = img.getSubimage(imgWidth*i, 0, imgWidth, imgHeight);
 
 		// TODO: Change this constructor so that at least eight orc animation pngs are loaded
 	}  
-
-	//Read image from file and return
-	private BufferedImage createImage(){
-		BufferedImage bufferedImage;
-		try {
-			bufferedImage = ImageIO.read(new File("images/orc/orc_forward_southeast.png"));
-			return bufferedImage;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-
-		// TODO: Change this method so you can load other orc animation bitmaps
-	}
+    
+    //Read image from file and return
+    private BufferedImage createImage(orcAction specifiedAction){ //orcAction is an enum
+    	BufferedImage bufferedImage;
+    	
+    	switch(specifiedAction){
+    		case FORWARD_NORTHEAST:
+    			break;
+    			
+    	}
+    	try {
+    		bufferedImage = ImageIO.read(new File("images/orc/orc_forward_southeast.png"));
+    		return bufferedImage;
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}
+    	return null;
+    	
+    	// TODO: Change this method so you can load other orc animation bitmaps
+    }
 }
