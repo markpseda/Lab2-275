@@ -55,7 +55,7 @@ public class Animation extends JPanel {
 		ans[5] = new Animation(orcAction.FORWARD_SOUTHEAST);
 		ans[6] = new Animation(orcAction.FORWARD_SOUTHWEST);
 		ans[7] = new Animation(orcAction.FORWARD_WEST);
-		frame.getContentPane().add(ans[5]);
+		frame.getContentPane().add(ans[1]);
 		frame.setBackground(Color.gray);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(frameWidth, frameHeight);
