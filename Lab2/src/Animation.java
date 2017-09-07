@@ -43,13 +43,13 @@ public class Animation extends JPanel {
     		
     		switch(currentDirection){// Redirection
 	    		case EAST:
-	    			currentDirection = OrcAction.WEST;
+	    			currentDirection = orcAction.FORWARD_WEST;
 	    			break;
 	    		case NORTHEAST:
-	    			currentDirection = OrcAction.NORTHWEST;
+	    			currentDirection = orcAction.FORWARD_NORTHWEST;
 	    			break;
 	    		case SOUTHEAST:
-	    			currentDirection = OrcAction.SOUTHWEST;
+	    			currentDirection = orcAction.FORWARD_SOUTHWEST;
 	    			break;
     		}
     	}
@@ -57,13 +57,13 @@ public class Animation extends JPanel {
     		g.drawImage(pics[picNum], xloc, yloc, Color.gray, this);
     		switch(currentDirection){
 	    		case WEST:
-	    			currentDirection = OrcAction.EAST;
+	    			currentDirection = orcAction.FORWARD_EAST;
 	    			break;
 	    		case NORTHWEST:
-	    			currentDirection = OrcAction.NORTHEAST;
+	    			currentDirection = orcAction.FORWARD_NORTHEAST;
 	    			break;
 	    		case SOUTHWEST:
-	    			currentDirection = OrcAction.SOUTHEAST;
+	    			currentDirection = orcAction.FORWARD_SOUTHEAST;
 	    			break;
 	    	}
     	}
@@ -71,13 +71,13 @@ public class Animation extends JPanel {
     		g.drawImage(pics[picNum], xloc, yloc, Color.gray, this);
     		switch(currentDirection){
 	    		case SOUTH:
-	    			currentDirection = OrcAction.NORTH;
+	    			currentDirection = orcAction.FORWARD_NORTH;
 	    			break;
 	    		case SOUTHEAST:
-	    			currentDirection = OrcAction.NORTHEAST;
+	    			currentDirection = orcAction.FORWARD_NORTHEAST;
 	    			break;
 	    		case SOUTHWEST:
-	    			currentDirection = OrcAction.NORTHWEST;
+	    			currentDirection = orcAction.FORWARD_NORTHWEST;
 	    			break;
 	    	}
     	}
@@ -85,13 +85,13 @@ public class Animation extends JPanel {
     		g.drawImage(pics[picNum], xloc, yloc, Color.gray, this);
     		switch(currentDirection){
 	    		case NORTH:
-	    			currentDirection = OrcAction.SOUTH;
+	    			currentDirection = orcAction.FORWARD_SOUTH;
 	    			break;
 	    		case NORTHEAST:
-	    			currentDirection = OrcAction.SOUTHEAST;
+	    			currentDirection = orcAction.FORWARD_SOUTHEAST;
 	    			break;
 	    		case NORTHWEST:
-	    			currentDirection = OrcAction.SOUTHWEST;
+	    			currentDirection = orcAction.FORWARD_SOUTHWEST;
 	    			break;
 	    			}
     }
