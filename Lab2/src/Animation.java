@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -28,6 +30,34 @@ public class Animation extends JPanel {
     public enum orcAction {
     	FORWARD_NORTHEAST, FORWARD_NORTHWEST, FORWARD_SOUTHEAST, FORWARD_SOUTHWEST, FORWARD_NORTH, FORWARD_SOUTH, FORWARD_EAST, FORWARD_WEST
     }
+    int picNum = 0;
+    BufferedImage[] currentPics;
+    
+    ArrayList<BufferedImage[]> allPics = new ArrayList<BufferedImage[]>(); //ArrayList of arrays of buffered images
+    
+    int xloc = 0;
+    int yloc = 0;
+    final int xIncr = 20;
+    final int yIncr = 20;
+    
+    // The below are only constant because the forward_ animations have the same characteristics. 
+    final static int frameCount = 10;
+    final static int frameWidth = 500;
+    final static int frameHeight = 300;
+    final static int imgWidth = 165;
+    final static int imgHeight = 165;
+    
+    public enum OrcAction {
+    	FORWARD_NORTH,FORWARD_SOUTH,FORWARD_EAST,FORWARD_WEST, FORWARD_NORTHEAST, FORWARD_NORTHWEST, FORWARD_SOUTHEAST, FORWARD_SOUTHWEST;
+    }
+    
+    
+    
+    
+    OrcAction currentAction = OrcAction.FORWARD_SOUTHEAST; //initialized in constructor, specifies which images to display and which direction to move.
+   
+    boolean actionHasChanged = false;
+    
 
     //Override this JPanel's paint method to cycle through picture array and draw images
     public void paint(Graphics g) {
@@ -39,17 +69,58 @@ public class Animation extends JPanel {
     	 */
    
     	if(xloc >= (frameWidth - imgWidth)){// East boundary switching direction
-    		g.drawImage(pics[picNum], xloc, yloc, Color.gray, this);
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
     		
     		switch(currentDirection){// Redirection
 	    		case EAST:
 	    			currentDirection = orcAction.FORWARD_WEST;
+    		switch(currentAction){// Redirection
+	    		case FORWARD_EAST:
+	    			currentAction = OrcAction.FORWARD_WEST;
 	    			break;
 	    		case NORTHEAST:
 	    			currentDirection = orcAction.FORWARD_NORTHWEST;
+	    		case FORWARD_NORTHEAST:
+	    			currentAction = OrcAction.FORWARD_NORTHWEST;
+	    		case FORWARD_NORTHEAST:
+	    			currentAction = OrcAction.FORWARD_NORTHWEST;
+	    		case FORWARD_NORTHEAST:
+	    			currentAction = OrcAction.FORWARD_NORTHWEST;
+	    		case FORWARD_NORTHEAST:
+	    			currentAction = OrcAction.FORWARD_NORTHWEST;
+	    		case FORWARD_NORTHEAST:
+	    			currentAction = OrcAction.FORWARD_NORTHWEST;
+	    		case FORWARD_NORTHEAST:
+	    			currentAction = OrcAction.FORWARD_NORTHWEST;
+	    		case FORWARD_NORTHEAST:
+	    			currentAction = OrcAction.FORWARD_NORTHWEST;
+	    		case FORWARD_NORTHEAST:
+	    			currentAction = OrcAction.FORWARD_NORTHWEST;
+	    		case FORWARD_NORTHEAST:
+	    			currentAction = OrcAction.FORWARD_NORTHWEST;
+	    		case FORWARD_NORTHEAST:
+	    			currentAction = OrcAction.FORWARD_NORTHWEST;
 	    			break;
 	    		case SOUTHEAST:
 	    			currentDirection = orcAction.FORWARD_SOUTHWEST;
+	    		case FORWARD_SOUTHEAST:
+	    			currentAction = OrcAction.FORWARD_SOUTHWEST;
+	    		case FORWARD_SOUTHEAST:
+	    			currentAction = OrcAction.FORWARD_SOUTHWEST;
+	    		case FORWARD_SOUTHEAST:
+	    			currentAction = OrcAction.FORWARD_SOUTHWEST;
+	    		case FORWARD_SOUTHEAST:
+	    			currentAction = OrcAction.FORWARD_SOUTHWEST;
+	    		case FORWARD_SOUTHEAST:
+	    			currentAction = OrcAction.FORWARD_SOUTHWEST;
+	    		case FORWARD_SOUTHEAST:
+	    			currentAction = OrcAction.FORWARD_SOUTHWEST;
+	    		case FORWARD_SOUTHEAST:
+	    			currentAction = OrcAction.FORWARD_SOUTHWEST;
+	    		case FORWARD_SOUTHEAST:
+	    			currentAction = OrcAction.FORWARD_SOUTHWEST;
 	    			break;
     		}
     	}
@@ -58,9 +129,568 @@ public class Animation extends JPanel {
     		switch(currentDirection){
 	    		case WEST:
 	    			currentDirection = orcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
+    		g.drawImage(currentPics[picNum], xloc, yloc, Color.gray, this);
+    		
+    		actionHasChanged = true;
+    		
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
 	    			break;
 	    		case NORTHWEST:
 	    			currentDirection = orcAction.FORWARD_NORTHEAST;
+	    		case FORWARD_NORTHWEST:
+	    			currentAction = OrcAction.FORWARD_NORTHEAST;
+	    		case FORWARD_NORTHWEST:
+	    			currentAction = OrcAction.FORWARD_NORTHEAST;
+	    		case FORWARD_NORTHWEST:
+	    			currentAction = OrcAction.FORWARD_NORTHEAST;
+	    		case FORWARD_NORTHWEST:
+	    			currentAction = OrcAction.FORWARD_NORTHEAST;
+	    		case FORWARD_NORTHWEST:
+	    			currentAction = OrcAction.FORWARD_NORTHEAST;
+	    		case FORWARD_NORTHWEST:
+	    			currentAction = OrcAction.FORWARD_NORTHEAST;
+	    		case FORWARD_NORTHWEST:
+	    			currentAction = OrcAction.FORWARD_NORTHEAST;
+	    		case FORWARD_NORTHWEST:
+	    			currentAction = OrcAction.FORWARD_NORTHEAST;
+	    		case FORWARD_NORTHWEST:
+	    			currentAction = OrcAction.FORWARD_NORTHEAST;
+	    		case FORWARD_NORTHWEST:
+	    			currentAction = OrcAction.FORWARD_NORTHEAST;
+	    		case FORWARD_NORTHWEST:
+	    			currentAction = OrcAction.FORWARD_NORTHEAST;
+	    		case FORWARD_NORTHWEST:
+	    			currentAction = OrcAction.FORWARD_NORTHEAST;
+	    		case FORWARD_NORTHWEST:
+	    			currentAction = OrcAction.FORWARD_NORTHEAST;
+	    		case FORWARD_NORTHWEST:
+	    			currentAction = OrcAction.FORWARD_NORTHEAST;
+	    		case FORWARD_NORTHWEST:
+	    			currentAction = OrcAction.FORWARD_NORTHEAST;
+	    		case FORWARD_NORTHWEST:
+	    			currentAction = OrcAction.FORWARD_NORTHEAST;
+	    		case FORWARD_NORTHWEST:
+	    			currentAction = OrcAction.FORWARD_NORTHEAST;
+	    		case FORWARD_NORTHWEST:
+	    			currentAction = OrcAction.FORWARD_NORTHEAST;
+	    		case FORWARD_NORTHWEST:
+	    			currentAction = OrcAction.FORWARD_NORTHEAST;
+	    		case FORWARD_NORTHWEST:
+	    			currentAction = OrcAction.FORWARD_NORTHEAST;
+	    		case FORWARD_NORTHWEST:
+	    			currentAction = OrcAction.FORWARD_NORTHEAST;
+	    		case FORWARD_NORTHWEST:
+	    			currentAction = OrcAction.FORWARD_NORTHEAST;
+	    		case FORWARD_NORTHWEST:
+	    			currentAction = OrcAction.FORWARD_NORTHEAST;
+	    		case FORWARD_NORTHWEST:
+	    			currentAction = OrcAction.FORWARD_NORTHEAST;
 	    			break;
 	    		case SOUTHWEST:
 	    			currentDirection = orcAction.FORWARD_SOUTHEAST;
@@ -97,30 +727,30 @@ public class Animation extends JPanel {
     }
     	picNum = (picNum + 1) % frameCount;
     	
-    	 switch(currentDirection){// Increments coordinates by direction
-	 		case NORTH:
-	 			g.drawImage(pics[picNum], xloc, yloc-=yIncr, Color.gray, this);
+    	 switch(currentAction){// Increments coordinates by direction
+	 		case FORWARD_NORTH:
+	 			g.drawImage(currentPics[picNum], xloc, yloc-=yIncr, Color.gray, this);
 	 			break;
-	 		case SOUTH:
-	 			g.drawImage(pics[picNum], xloc, yloc+=yIncr, Color.gray, this);
+	 		case FORWARD_SOUTH:
+	 			g.drawImage(currentPics[picNum], xloc, yloc+=yIncr, Color.gray, this);
 	 			break;
-	 		case EAST:
-	 			g.drawImage(pics[picNum], xloc+=xIncr, yloc, Color.gray, this);
+	 		case FORWARD_EAST:
+	 			g.drawImage(currentPics[picNum], xloc+=xIncr, yloc, Color.gray, this);
 	 			break;
-	 		case WEST:
-	 			g.drawImage(pics[picNum], xloc-=xIncr, yloc, Color.gray, this);
+	 		case FORWARD_WEST:
+	 			g.drawImage(currentPics[picNum], xloc-=xIncr, yloc, Color.gray, this);
 	 			break;
-	 		case NORTHEAST:
-	 			g.drawImage(pics[picNum], xloc+=xIncr, yloc-=yIncr, Color.gray, this);
+	 		case FORWARD_NORTHEAST:
+	 			g.drawImage(currentPics[picNum], xloc+=xIncr, yloc-=yIncr, Color.gray, this);
 	 			break;
-	 		case NORTHWEST:
-	 			g.drawImage(pics[picNum], xloc-=xIncr, yloc-=yIncr, Color.gray, this);
+	 		case FORWARD_NORTHWEST:
+	 			g.drawImage(currentPics[picNum], xloc-=xIncr, yloc-=yIncr, Color.gray, this);
 	 			break;
-	 		case SOUTHEAST:
-	 			g.drawImage(pics[picNum], xloc+=xIncr, yloc+=yIncr, Color.gray, this);
+	 		case FORWARD_SOUTHEAST:
+	 			g.drawImage(currentPics[picNum], xloc+=xIncr, yloc+=yIncr, Color.gray, this);
 	 			break;
-	 		case SOUTHWEST:
-	 			g.drawImage(pics[picNum], xloc-=xIncr, yloc+=yIncr, Color.gray, this);
+	 		case FORWARD_SOUTHWEST:
+	 			g.drawImage(currentPics[picNum], xloc-=xIncr, yloc+=yIncr, Color.gray, this);
 	 			break;
 	 	}
     }
@@ -204,7 +834,8 @@ public class Animation extends JPanel {
     	} catch (IOException e) {
     		e.printStackTrace();
     	}
-    	return null;
-    	// TODO: Change this method so you can load other orc animation bitmaps
+    	actionHasChanged = false;
     }
 }
+    
+
