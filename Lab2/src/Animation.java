@@ -151,7 +151,7 @@ public class Animation extends JPanel {
     //Constructor: get image, segment and store in array
     public Animation(){
     	//this.currentAction =  OrcAction;
-    	BufferedImageGenerator forward_southeast = new BufferedImageGenerator(frameCount, frameCount, frameCount, "images/orc/orc_forward_southeast.png");
+    	BufferedImageGenerator forward_southeast = new BufferedImageGenerator(imgWidth, imgHeight, frameCount, "images/orc/orc_forward_southeast.png");
     	
     	pics = forward_southeast.getBufferedImageArray();
     	
