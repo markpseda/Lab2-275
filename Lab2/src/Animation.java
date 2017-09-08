@@ -17,16 +17,16 @@ public class Animation extends JPanel {
     BufferedImage[] pics;
     int xloc = 0;
     int yloc = 0;
-    final int xIncr = 8;
-    final int yIncr = 2;
+    final int xIncr = 20;
+    final int yIncr = 20;
     final static int frameWidth = 500;
     final static int frameHeight = 300;
     final static int imgWidth = 165;
     final static int imgHeight = 165;
     public enum OrcAction {
-    	NORTH,SOUTH,EAST,WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST
+    	FORWARD_NORTH,FORWARD_SOUTH,FORWARD_EAST,FORWARD_WEST, FORWARD_NORTHEAST, FORWARD_NORTHWEST, FORWARD_SOUTHEAST, FORWARD_SOUTHWEST
     	}
-    OrcAction currentDirection = OrcAction.SOUTHEAST; //Initialized direction
+    OrcAction currentAction = OrcAction.FORWARD_SOUTHWEST; //initialized in constructor, specifies which images to display and which direction to move.
    
 
     //Override this JPanel's paint method to cycle through picture array and draw images
@@ -41,85 +41,85 @@ public class Animation extends JPanel {
     	if(xloc >= (frameWidth - imgWidth)){// East boundary switching direction
     		g.drawImage(pics[picNum], xloc, yloc, Color.gray, this);
     		
-    		switch(currentDirection){// Redirection
-	    		case EAST:
-	    			currentDirection = OrcAction.WEST;
+    		switch(currentAction){// Redirection
+	    		case FORWARD_EAST:
+	    			currentAction = OrcAction.FORWARD_WEST;
 	    			break;
-	    		case NORTHEAST:
-	    			currentDirection = OrcAction.NORTHWEST;
+	    		case FORWARD_NORTHEAST:
+	    			currentAction = OrcAction.FORWARD_NORTHWEST;
 	    			break;
-	    		case SOUTHEAST:
-	    			currentDirection = OrcAction.SOUTHWEST;
+	    		case FORWARD_SOUTHEAST:
+	    			currentAction = OrcAction.FORWARD_SOUTHWEST;
 	    			break;
     		}
     	}
     	else if (xloc < 0){//West boundary switching direction
     		g.drawImage(pics[picNum], xloc, yloc, Color.gray, this);
-    		switch(currentDirection){
-	    		case WEST:
-	    			currentDirection = OrcAction.EAST;
+    		switch(currentAction){
+	    		case FORWARD_WEST:
+	    			currentAction = OrcAction.FORWARD_EAST;
 	    			break;
-	    		case NORTHWEST:
-	    			currentDirection = OrcAction.NORTHEAST;
+	    		case FORWARD_NORTHWEST:
+	    			currentAction = OrcAction.FORWARD_NORTHEAST;
 	    			break;
-	    		case SOUTHWEST:
-	    			currentDirection = OrcAction.SOUTHEAST;
+	    		case FORWARD_SOUTHWEST:
+	    			currentAction = OrcAction.FORWARD_SOUTHEAST;
 	    			break;
 	    	}
     	}
     	else if (yloc >= (frameHeight - imgHeight)){// South boundary switching direction
     		g.drawImage(pics[picNum], xloc, yloc, Color.gray, this);
-    		switch(currentDirection){
-	    		case SOUTH:
-	    			currentDirection = OrcAction.NORTH;
+    		switch(currentAction){
+	    		case FORWARD_SOUTH:
+	    			currentAction = OrcAction.FORWARD_NORTH;
 	    			break;
-	    		case SOUTHEAST:
-	    			currentDirection = OrcAction.NORTHEAST;
+	    		case FORWARD_SOUTHEAST:
+	    			currentAction = OrcAction.FORWARD_NORTHEAST;
 	    			break;
-	    		case SOUTHWEST:
-	    			currentDirection = OrcAction.NORTHWEST;
+	    		case FORWARD_SOUTHWEST:
+	    			currentAction = OrcAction.FORWARD_NORTHWEST;
 	    			break;
 	    	}
     	}
     	else if (yloc < 0){// North boundary switching direction
     		g.drawImage(pics[picNum], xloc, yloc, Color.gray, this);
-    		switch(currentDirection){
-	    		case NORTH:
-	    			currentDirection = OrcAction.SOUTH;
+    		switch(currentAction){
+	    		case FORWARD_NORTH:
+	    			currentAction = OrcAction.FORWARD_SOUTH;
 	    			break;
-	    		case NORTHEAST:
-	    			currentDirection = OrcAction.SOUTHEAST;
+	    		case FORWARD_NORTHEAST:
+	    			currentAction = OrcAction.FORWARD_SOUTHEAST;
 	    			break;
-	    		case NORTHWEST:
-	    			currentDirection = OrcAction.SOUTHWEST;
+	    		case FORWARD_NORTHWEST:
+	    			currentAction = OrcAction.FORWARD_SOUTHWEST;
 	    			break;
 	    	}
     	}
     	picNum = (picNum + 1) % frameCount;
     	
-    	 switch(currentDirection){// Increments coordinates by direction
-	 		case NORTH:
+    	 switch(currentAction){// Increments coordinates by direction
+	 		case FORWARD_NORTH:
 	 			g.drawImage(pics[picNum], xloc, yloc-=yIncr, Color.gray, this);
 	 			break;
-	 		case SOUTH:
+	 		case FORWARD_SOUTH:
 	 			g.drawImage(pics[picNum], xloc, yloc+=yIncr, Color.gray, this);
 	 			break;
-	 		case EAST:
+	 		case FORWARD_EAST:
 	 			g.drawImage(pics[picNum], xloc+=xIncr, yloc, Color.gray, this);
 	 			break;
-	 		case WEST:
+	 		case FORWARD_WEST:
 	 			g.drawImage(pics[picNum], xloc-=xIncr, yloc, Color.gray, this);
 	 			break;
-	 		case NORTHEAST:
+	 		case FORWARD_NORTHEAST:
 	 			g.drawImage(pics[picNum], xloc+=xIncr, yloc-=yIncr, Color.gray, this);
 	 			break;
-	 		case NORTHWEST:
+	 		case FORWARD_NORTHWEST:
 	 			g.drawImage(pics[picNum], xloc-=xIncr, yloc-=yIncr, Color.gray, this);
 	 			break;
-	 		case SOUTHEAST:
+	 		case FORWARD_SOUTHEAST:
 	 			g.drawImage(pics[picNum], xloc+=xIncr, yloc+=yIncr, Color.gray, this);
 	 			break;
-	 		case SOUTHWEST:
+	 		case FORWARD_SOUTHWEST:
 	 			g.drawImage(pics[picNum], xloc-=xIncr, yloc+=yIncr, Color.gray, this);
 	 			break;
 	 	}
@@ -150,25 +150,12 @@ public class Animation extends JPanel {
 
     //Constructor: get image, segment and store in array
     public Animation(){
-    	BufferedImage img = createImage();
-    	pics = new BufferedImage[10];
-    	for(int i = 0; i < frameCount; i++)
-    		pics[i] = img.getSubimage(imgWidth*i, 0, imgWidth, imgHeight);
+    	//this.currentAction =  OrcAction;
+    	BufferedImageGenerator forward_southeast = new BufferedImageGenerator(frameCount, frameCount, frameCount, "images/orc/orc_forward_southeast.png");
+    	
+    	pics = forward_southeast.getBufferedImageArray();
     	
     	// TODO: Change this constructor so that at least eight orc animation pngs are loaded
     }  
     
-    //Read image from file and return
-    private BufferedImage createImage(){
-    	BufferedImage bufferedImage;
-    	try {
-    		bufferedImage = ImageIO.read(new File("images/orc/orc_forward_southeast.png"));
-    		return bufferedImage;
-    	} catch (IOException e) {
-    		e.printStackTrace();
-    	}
-    	return null;
-    	
-    	// TODO: Change this method so you can load other orc animation bitmaps
-    }
 }
