@@ -23,13 +23,14 @@ public class Animation extends JPanel {
 	final static int frameHeight = 300;
 	final static int imgWidth = 165;
 	final static int imgHeight = 165;
-	int test;
+	boolean directionHasChanged = false;
     
     public enum orcAction {
     	FORWARD_NORTHEAST, FORWARD_NORTHWEST, FORWARD_SOUTHEAST, FORWARD_SOUTHWEST, FORWARD_NORTH, FORWARD_SOUTH, FORWARD_EAST, FORWARD_WEST
     }
     
     orcAction currentDirection;
+    orcAction oldDirection;
 
     //Override this JPanel's paint method to cycle through picture array and draw images
     public void paint(Graphics g) {
@@ -41,59 +42,75 @@ public class Animation extends JPanel {
     	 */
    
     	if(xloc >= (frameWidth - imgWidth)){// East boundary switching direction
+    		oldDirection = currentDirection;
     		g.drawImage(pics[picNum], xloc, yloc, Color.gray, this);
     		
     		switch(currentDirection){// Redirection
 	    		case FORWARD_EAST:
 	    			currentDirection = orcAction.FORWARD_WEST;
+	    			directionHasChanged = true;
 	    			break;
 	    		case FORWARD_NORTHEAST:
 	    			currentDirection = orcAction.FORWARD_NORTHWEST;
+	    			directionHasChanged = true;
 	    			break;
 	    		case FORWARD_SOUTHEAST:
 	    			currentDirection = orcAction.FORWARD_SOUTHWEST;
+	    			directionHasChanged = true;
 	    			break;
     		}
     	}
     	else if (xloc < 0){//West boundary switching direction
+    		oldDirection = currentDirection;
     		g.drawImage(pics[picNum], xloc, yloc, Color.gray, this);
     		switch(currentDirection){
 	    		case FORWARD_WEST:
 	    			currentDirection = orcAction.FORWARD_EAST;
+	    			directionHasChanged = true;
 	    			break;
 	    		case FORWARD_NORTHWEST:
 	    			currentDirection = orcAction.FORWARD_NORTHEAST;
+	    			directionHasChanged = true;
 	    			break;
 	    		case FORWARD_SOUTHWEST:
 	    			currentDirection = orcAction.FORWARD_SOUTHEAST;
+	    			directionHasChanged = true;
 	    			break;
 	    	}
     	}
     	else if (yloc >= (frameHeight - imgHeight)){// South boundary switching direction
+    		oldDirection = currentDirection;
     		g.drawImage(pics[picNum], xloc, yloc, Color.gray, this);
     		switch(currentDirection){
 	    		case FORWARD_SOUTH:
 	    			currentDirection = orcAction.FORWARD_NORTH;
+	    			directionHasChanged = true;
 	    			break;
 	    		case FORWARD_SOUTHEAST:
 	    			currentDirection = orcAction.FORWARD_NORTHEAST;
+	    			directionHasChanged = true;
 	    			break;
 	    		case FORWARD_SOUTHWEST:
 	    			currentDirection = orcAction.FORWARD_NORTHWEST;
+	    			directionHasChanged = true;
 	    			break;
 	    	}
     	}
     	else if (yloc < 0){// North boundary switching direction
+    		oldDirection = currentDirection;
     		g.drawImage(pics[picNum], xloc, yloc, Color.gray, this);
     		switch(currentDirection){
 	    		case FORWARD_NORTH:
 	    			currentDirection = orcAction.FORWARD_SOUTH;
+	    			directionHasChanged = true;
 	    			break;
 	    		case FORWARD_NORTHEAST:
 	    			currentDirection = orcAction.FORWARD_SOUTHEAST;
+	    			directionHasChanged = true;
 	    			break;
 	    		case FORWARD_NORTHWEST:
 	    			currentDirection = orcAction.FORWARD_SOUTHWEST;
+	    			directionHasChanged = true;
 	    			break;
 	    	}
     	}
@@ -101,10 +118,10 @@ public class Animation extends JPanel {
     	
     	 switch(currentDirection){// Increments coordinates by direction
 	 		case FORWARD_NORTH:
-	 			g.drawImage(pics[picNum], xloc, yloc-=yIncr, Color.gray, this);
+	 			g.drawImage(pics[picNum], xloc, yloc+=yIncr, Color.gray, this);
 	 			break;
 	 		case FORWARD_SOUTH:
-	 			g.drawImage(pics[picNum], xloc, yloc+=yIncr, Color.gray, this);
+	 			g.drawImage(pics[picNum], xloc, yloc-=yIncr, Color.gray, this);
 	 			break;
 	 		case FORWARD_EAST:
 	 			g.drawImage(pics[picNum], xloc+=xIncr, yloc, Color.gray, this);
@@ -113,16 +130,16 @@ public class Animation extends JPanel {
 	 			g.drawImage(pics[picNum], xloc-=xIncr, yloc, Color.gray, this);
 	 			break;
 	 		case FORWARD_NORTHEAST:
-	 			g.drawImage(pics[picNum], xloc+=xIncr, yloc-=yIncr, Color.gray, this);
-	 			break;
-	 		case FORWARD_NORTHWEST:
-	 			g.drawImage(pics[picNum], xloc-=xIncr, yloc-=yIncr, Color.gray, this);
-	 			break;
-	 		case FORWARD_SOUTHEAST:
 	 			g.drawImage(pics[picNum], xloc+=xIncr, yloc+=yIncr, Color.gray, this);
 	 			break;
-	 		case FORWARD_SOUTHWEST:
+	 		case FORWARD_NORTHWEST:
 	 			g.drawImage(pics[picNum], xloc-=xIncr, yloc+=yIncr, Color.gray, this);
+	 			break;
+	 		case FORWARD_SOUTHEAST:
+	 			g.drawImage(pics[picNum], xloc+=xIncr, yloc-=yIncr, Color.gray, this);
+	 			break;
+	 		case FORWARD_SOUTHWEST:
+	 			g.drawImage(pics[picNum], xloc-=xIncr, yloc-=yIncr, Color.gray, this);
 	 			break;
 	 	}
     }
@@ -141,12 +158,53 @@ public class Animation extends JPanel {
 		ans[5] = new Animation(orcAction.FORWARD_SOUTHEAST);
 		ans[6] = new Animation(orcAction.FORWARD_SOUTHWEST);
 		ans[7] = new Animation(orcAction.FORWARD_WEST);
-		frame.getContentPane().add(ans[1]);
+		int currentAnimation = 3;
+		frame.getContentPane().add(ans[currentAnimation]);
+		
 		frame.setBackground(Color.gray);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(frameWidth, frameHeight);
 		frame.setVisible(true);
 		for(int i = 0; i < 1000; i++){
+			if(ans[currentAnimation].directionHasChanged){
+				orcAction newDirection = ans[currentAnimation].currentDirection; //get the newly changed direction from the animation object
+				frame.getContentPane().remove(ans[currentAnimation]);
+				ans[currentAnimation].currentDirection = ans[currentAnimation].oldDirection;
+				int newx = ans[currentAnimation].xloc;
+				int newy = ans[currentAnimation].yloc;
+				switch(newDirection){
+					case FORWARD_EAST:
+						currentAnimation = 0;
+						break;
+					case FORWARD_NORTH:
+						currentAnimation = 1;
+						break;
+					case FORWARD_NORTHEAST:
+						currentAnimation = 2;
+						break;
+					case FORWARD_NORTHWEST:
+						currentAnimation = 3;
+						break;
+					case FORWARD_SOUTH:
+						currentAnimation = 4;
+						break;
+					case FORWARD_SOUTHEAST:
+						currentAnimation = 5;
+						break;
+					case FORWARD_SOUTHWEST:
+						currentAnimation = 6;
+						break;
+					case FORWARD_WEST:
+						currentAnimation = 7;
+						break;
+				}
+				ans[currentAnimation].xloc = newx;
+				ans[currentAnimation].yloc = newy;
+				ans[currentAnimation].directionHasChanged = false;
+				
+				frame.getContentPane().add(ans[currentAnimation]); //replace with new animation
+				frame.setBackground(Color.gray);
+			}
 			frame.repaint();
 			try {
 				Thread.sleep(100);
@@ -160,6 +218,7 @@ public class Animation extends JPanel {
 	
 	//Constructor: get image, segment and store in array
 	public Animation(orcAction specifiedAction){
+		this.currentDirection = specifiedAction;
 		BufferedImage img = createImage(specifiedAction);
 		pics = new BufferedImage[frameCount];
 		for(int i = 0; i < frameCount; i++)
