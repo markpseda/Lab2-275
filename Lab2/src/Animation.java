@@ -28,6 +28,8 @@ public class Animation extends JPanel {
     public enum orcAction {
     	FORWARD_NORTHEAST, FORWARD_NORTHWEST, FORWARD_SOUTHEAST, FORWARD_SOUTHWEST, FORWARD_NORTH, FORWARD_SOUTH, FORWARD_EAST, FORWARD_WEST
     }
+    
+    orcAction currentDirection;
 
     //Override this JPanel's paint method to cycle through picture array and draw images
     public void paint(Graphics g) {
@@ -42,13 +44,13 @@ public class Animation extends JPanel {
     		g.drawImage(pics[picNum], xloc, yloc, Color.gray, this);
     		
     		switch(currentDirection){// Redirection
-	    		case EAST:
+	    		case FORWARD_EAST:
 	    			currentDirection = orcAction.FORWARD_WEST;
 	    			break;
-	    		case NORTHEAST:
+	    		case FORWARD_NORTHEAST:
 	    			currentDirection = orcAction.FORWARD_NORTHWEST;
 	    			break;
-	    		case SOUTHEAST:
+	    		case FORWARD_SOUTHEAST:
 	    			currentDirection = orcAction.FORWARD_SOUTHWEST;
 	    			break;
     		}
@@ -56,13 +58,13 @@ public class Animation extends JPanel {
     	else if (xloc < 0){//West boundary switching direction
     		g.drawImage(pics[picNum], xloc, yloc, Color.gray, this);
     		switch(currentDirection){
-	    		case WEST:
+	    		case FORWARD_WEST:
 	    			currentDirection = orcAction.FORWARD_EAST;
 	    			break;
-	    		case NORTHWEST:
+	    		case FORWARD_NORTHWEST:
 	    			currentDirection = orcAction.FORWARD_NORTHEAST;
 	    			break;
-	    		case SOUTHWEST:
+	    		case FORWARD_SOUTHWEST:
 	    			currentDirection = orcAction.FORWARD_SOUTHEAST;
 	    			break;
 	    	}
@@ -70,13 +72,13 @@ public class Animation extends JPanel {
     	else if (yloc >= (frameHeight - imgHeight)){// South boundary switching direction
     		g.drawImage(pics[picNum], xloc, yloc, Color.gray, this);
     		switch(currentDirection){
-	    		case SOUTH:
+	    		case FORWARD_SOUTH:
 	    			currentDirection = orcAction.FORWARD_NORTH;
 	    			break;
-	    		case SOUTHEAST:
+	    		case FORWARD_SOUTHEAST:
 	    			currentDirection = orcAction.FORWARD_NORTHEAST;
 	    			break;
-	    		case SOUTHWEST:
+	    		case FORWARD_SOUTHWEST:
 	    			currentDirection = orcAction.FORWARD_NORTHWEST;
 	    			break;
 	    	}
@@ -84,49 +86,48 @@ public class Animation extends JPanel {
     	else if (yloc < 0){// North boundary switching direction
     		g.drawImage(pics[picNum], xloc, yloc, Color.gray, this);
     		switch(currentDirection){
-	    		case NORTH:
+	    		case FORWARD_NORTH:
 	    			currentDirection = orcAction.FORWARD_SOUTH;
 	    			break;
-	    		case NORTHEAST:
+	    		case FORWARD_NORTHEAST:
 	    			currentDirection = orcAction.FORWARD_SOUTHEAST;
 	    			break;
-	    		case NORTHWEST:
+	    		case FORWARD_NORTHWEST:
 	    			currentDirection = orcAction.FORWARD_SOUTHWEST;
 	    			break;
-	    			}
-    }
+	    	}
+    	}
     	picNum = (picNum + 1) % frameCount;
     	
     	 switch(currentDirection){// Increments coordinates by direction
-	 		case NORTH:
+	 		case FORWARD_NORTH:
 	 			g.drawImage(pics[picNum], xloc, yloc-=yIncr, Color.gray, this);
 	 			break;
-	 		case SOUTH:
+	 		case FORWARD_SOUTH:
 	 			g.drawImage(pics[picNum], xloc, yloc+=yIncr, Color.gray, this);
 	 			break;
-	 		case EAST:
+	 		case FORWARD_EAST:
 	 			g.drawImage(pics[picNum], xloc+=xIncr, yloc, Color.gray, this);
 	 			break;
-	 		case WEST:
+	 		case FORWARD_WEST:
 	 			g.drawImage(pics[picNum], xloc-=xIncr, yloc, Color.gray, this);
 	 			break;
-	 		case NORTHEAST:
+	 		case FORWARD_NORTHEAST:
 	 			g.drawImage(pics[picNum], xloc+=xIncr, yloc-=yIncr, Color.gray, this);
 	 			break;
-	 		case NORTHWEST:
+	 		case FORWARD_NORTHWEST:
 	 			g.drawImage(pics[picNum], xloc-=xIncr, yloc-=yIncr, Color.gray, this);
 	 			break;
-	 		case SOUTHEAST:
+	 		case FORWARD_SOUTHEAST:
 	 			g.drawImage(pics[picNum], xloc+=xIncr, yloc+=yIncr, Color.gray, this);
 	 			break;
-	 		case SOUTHWEST:
+	 		case FORWARD_SOUTHWEST:
 	 			g.drawImage(pics[picNum], xloc-=xIncr, yloc+=yIncr, Color.gray, this);
 	 			break;
 	 	}
     }
     	// TODO: Keep the orc from walking off-screen, turn around when bouncing off walls. Test
     	//Be sure that animation picture direction matches what is happening on screen.
-    }
 
 	//Make frame, loop on repaint and wait
 	public static void main(String[] args) {
