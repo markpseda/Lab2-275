@@ -160,7 +160,7 @@ public class Animation extends JPanel {
 		}
 	}
     
-    //Read image from file and return
+    //Read image from file and return 
     private BufferedImage createImage(orcAction specifiedAction){ //orcAction is an enum
     	BufferedImage bufferedImage;
     	String file = "";
