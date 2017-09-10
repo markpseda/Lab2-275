@@ -151,7 +151,7 @@ public class Animation extends JPanel {
 	//Constructor: get image, segment and store in array
 	public Animation(){
 		BufferedImage img;
-		pics = new BufferedImage[8][frameCount];
+		pics = new BufferedImage[orcAction.values().length][frameCount];
 		for (orcAction a : orcAction.values()) {
 			for (int i = 0; i < frameCount; i++) {
 				img = createImage(a);
