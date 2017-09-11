@@ -33,6 +33,10 @@ public class Animation extends JPanel {
 	// Are constants only because all the png's are same size
 	final static int imgWidth = 165;
 	final static int imgHeight = 165;
+	
+	final static int xOffset = 30;
+	final static int yOffset = 30;
+	
 	final int frameCount = 10;
 	
 	orcAction currentAction;
@@ -65,7 +69,7 @@ public class Animation extends JPanel {
 	    			break;
     		}
     	}
-    	else if (xloc < -30){//West boundary switching direction, offset to account for blank space on image.
+    	else if (xloc < - xOffset){//West boundary switching direction, offset to account for blank space on image.
     		g.drawImage(pics[currentAction.ordinal()][picNum], xloc, yloc, Color.gray, this);
     		switch(currentAction){
 	    		case FORWARD_WEST:
@@ -79,7 +83,7 @@ public class Animation extends JPanel {
 	    			break;
 	    	}
     	}
-    	else if (yloc >= (frameHeight - imgHeight - 30)){// South boundary switching direction, offset to account for blank space on image.
+    	else if (yloc >= (frameHeight - imgHeight - yOffset)){// South boundary switching direction, offset to account for blank space on image.
     		g.drawImage(pics[currentAction.ordinal()][picNum], xloc, yloc, Color.gray, this);
     		switch(currentAction){
 	    		case FORWARD_SOUTH:
@@ -93,7 +97,7 @@ public class Animation extends JPanel {
 	    			break;
 	    	}
     	}
-    	else if (yloc < -25){// North boundary switching direction, offset to account for blank space on image.
+    	else if (yloc < - yOffset){// North boundary switching direction, offset to account for blank space on image.
     		g.drawImage(pics[currentAction.ordinal()][picNum], xloc, yloc, Color.gray, this);
     		switch(currentAction){
 	    		case FORWARD_NORTH:
