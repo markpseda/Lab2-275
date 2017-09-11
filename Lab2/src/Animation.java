@@ -1,6 +1,12 @@
 //T Harvey
 //based loosely on http://www.java2s.com/Code/JavaAPI/java.awt/GraphicsdrawImageImageimgintxintyImageObserverob.htm
 
+// Lab 2 CISC 275-010 Fall 2017
+// Worked on by:
+// Daniel Schmidt
+// Kaeini Ekong
+// Mark Seda
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -125,8 +131,6 @@ public class Animation extends JPanel {
 	 			break;
 	 	}
     }
-    	// TODO: Keep the orc from walking off-screen, turn around when bouncing off walls. Test
-    	//Be sure that animation picture direction matches what is happening on screen.
 
 	//Make frame, loop on repaint and wait
 	public static void main(String[] args) {
@@ -197,6 +201,5 @@ public class Animation extends JPanel {
     		e.printStackTrace();
     	}
     	return null;
-    	// TODO: Change this method so you can load other orc animation bitmaps
     }
 }
