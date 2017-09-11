@@ -17,20 +17,25 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Animation extends JPanel {
-
-	final int frameCount = 10;
+	//current picture that is being displayed
 	int picNum = 0;
+	
+	// 2D Array of pictures for all animations a "Animation" object may have
 	BufferedImage[][] pics;
-	int xloc = 0;
-	int yloc = 0;
+
 	final int xIncr = 8;
 	final int yIncr = 2;
+	
+	int xloc, yloc; //undefined until object created
+	
 	final static int frameWidth = 500;
 	final static int frameHeight = 300;
+	// Are constants only because all the png's are same size
 	final static int imgWidth = 165;
 	final static int imgHeight = 165;
-	int test;
-	orcAction currentDirection = orcAction.FORWARD_SOUTHEAST;
+	final int frameCount = 10;
+	
+	orcAction currentAction;
     
     public enum orcAction {
     	FORWARD_NORTHEAST, FORWARD_NORTHWEST, FORWARD_SOUTHEAST, FORWARD_SOUTHWEST, FORWARD_NORTH, FORWARD_SOUTH, FORWARD_EAST, FORWARD_WEST
@@ -44,67 +49,67 @@ public class Animation extends JPanel {
     	 * East = Right of the frame
     	 * West = Left of the frame
     	 */
-   
     	if(xloc >= (frameWidth - imgWidth)){// East boundary switching direction
-    		g.drawImage(pics[currentDirection.ordinal()][picNum], xloc, yloc, Color.gray, this);
+    		g.drawImage(pics[currentAction.ordinal()][picNum], xloc, yloc, Color.gray, this);
     		
-    		switch(currentDirection){// Redirection
+    		
+    		switch(currentAction){// Redirection
 	    		case FORWARD_EAST:
-	    			currentDirection = orcAction.FORWARD_WEST;
+	    			currentAction = orcAction.FORWARD_WEST;
 	    			break;
 	    		case FORWARD_NORTHEAST:
-	    			currentDirection = orcAction.FORWARD_NORTHWEST;
+	    			currentAction = orcAction.FORWARD_NORTHWEST;
 	    			break;
 	    		case FORWARD_SOUTHEAST:
-	    			currentDirection = orcAction.FORWARD_SOUTHWEST;
+	    			currentAction = orcAction.FORWARD_SOUTHWEST;
 	    			break;
     		}
     	}
-    	else if (xloc < 0){//West boundary switching direction
-    		g.drawImage(pics[currentDirection.ordinal()][picNum], xloc, yloc, Color.gray, this);
-    		switch(currentDirection){
+    	else if (xloc < -30){//West boundary switching direction, offset to account for blank space on image.
+    		g.drawImage(pics[currentAction.ordinal()][picNum], xloc, yloc, Color.gray, this);
+    		switch(currentAction){
 	    		case FORWARD_WEST:
-	    			currentDirection = orcAction.FORWARD_EAST;
+	    			currentAction = orcAction.FORWARD_EAST;
 	    			break;
 	    		case FORWARD_NORTHWEST:
-	    			currentDirection = orcAction.FORWARD_NORTHEAST;
+	    			currentAction = orcAction.FORWARD_NORTHEAST;
 	    			break;
 	    		case FORWARD_SOUTHWEST:
-	    			currentDirection = orcAction.FORWARD_SOUTHEAST;
+	    			currentAction = orcAction.FORWARD_SOUTHEAST;
 	    			break;
 	    	}
     	}
-    	else if (yloc >= (frameHeight - imgHeight)){// South boundary switching direction
-    		g.drawImage(pics[currentDirection.ordinal()][picNum], xloc, yloc, Color.gray, this);
-    		switch(currentDirection){
+    	else if (yloc >= (frameHeight - imgHeight - 30)){// South boundary switching direction, offset to account for blank space on image.
+    		g.drawImage(pics[currentAction.ordinal()][picNum], xloc, yloc, Color.gray, this);
+    		switch(currentAction){
 	    		case FORWARD_SOUTH:
-	    			currentDirection = orcAction.FORWARD_NORTH;
+	    			currentAction = orcAction.FORWARD_NORTH;
 	    			break;
 	    		case FORWARD_SOUTHEAST:
-	    			currentDirection = orcAction.FORWARD_NORTHEAST;
+	    			currentAction = orcAction.FORWARD_NORTHEAST;
 	    			break;
 	    		case FORWARD_SOUTHWEST:
-	    			currentDirection = orcAction.FORWARD_NORTHWEST;
+	    			currentAction = orcAction.FORWARD_NORTHWEST;
 	    			break;
 	    	}
     	}
-    	else if (yloc < 0){// North boundary switching direction
-    		g.drawImage(pics[currentDirection.ordinal()][picNum], xloc, yloc, Color.gray, this);
-    		switch(currentDirection){
+    	else if (yloc < -25){// North boundary switching direction, offset to account for blank space on image.
+    		g.drawImage(pics[currentAction.ordinal()][picNum], xloc, yloc, Color.gray, this);
+    		switch(currentAction){
 	    		case FORWARD_NORTH:
-	    			currentDirection = orcAction.FORWARD_SOUTH;
+	    			currentAction = orcAction.FORWARD_SOUTH;
 	    			break;
 	    		case FORWARD_NORTHEAST:
-	    			currentDirection = orcAction.FORWARD_SOUTHEAST;
+	    			currentAction = orcAction.FORWARD_SOUTHEAST;
 	    			break;
 	    		case FORWARD_NORTHWEST:
-	    			currentDirection = orcAction.FORWARD_SOUTHWEST;
+	    			currentAction = orcAction.FORWARD_SOUTHWEST;
 	    			break;
 	    			}
     }
     	picNum = (picNum + 1) % frameCount;
     	
-    	 switch(currentDirection){// Increments coordinates by direction
+    	 switch(currentAction){// Increments coordinates by direction
 	 		case FORWARD_NORTH:
 	 			g.drawImage(pics[orcAction.FORWARD_NORTH.ordinal()][picNum], xloc, yloc-=yIncr, Color.gray, this);
 	 			break;
@@ -135,7 +140,10 @@ public class Animation extends JPanel {
 	//Make frame, loop on repaint and wait
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-		frame.getContentPane().add(new Animation());
+		int xInit = 0;
+		int yInit = 0;
+		
+		frame.getContentPane().add(new Animation(xInit, yInit, orcAction.FORWARD_SOUTHEAST));
 		frame.setBackground(Color.gray);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(frameWidth, frameHeight);
@@ -153,7 +161,10 @@ public class Animation extends JPanel {
 	//Each different png is contained in pics in its instance of Animation
 	
 	//Constructor: get image, segment and store in array
-	public Animation(){
+	public Animation(int xStart, int yStart, orcAction initialAction){ //original x location, y location, and initial action
+		this.currentAction = initialAction;
+		this.xloc = xStart;
+		this.yloc = yStart;
 		BufferedImage img;
 		pics = new BufferedImage[orcAction.values().length][frameCount];
 		for (orcAction a : orcAction.values()) {
@@ -165,7 +176,7 @@ public class Animation extends JPanel {
 	}
     
     //Read image from file and return 
-    private BufferedImage createImage(orcAction specifiedAction){ //orcAction is an enum
+    private BufferedImage createImage(orcAction specifiedAction){ //orcAction is an enum corresponding to a png file
     	BufferedImage bufferedImage;
     	String file = "";
     	switch(specifiedAction){
